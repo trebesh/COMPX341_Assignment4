@@ -24,11 +24,19 @@ def hello():
     count = get_hit_count()
     return 'Hello World! I have been seen {} times.\n'.format(count)
 
-@app.route('/isPrime/<number>')
-def isPrime(number):
+@app.route('/isPrime/<numberString>')
+def isPrime(numberString):
+    number = int(numberString)
+    if number > 1:
+        for i in range(2, number//2 + 1):
+            if (number % i) == 0:
+                return (numberString + ' is not prime')
+        else:
+            return (numberString + ' is prime')
+    else:
+        return (numberString + ' is not prime')
+    #primeness algorithm adapted from https://www.geeksforgeeks.org/python-program-to-check-whether-a-number-is-prime-or-not/
     
-    return ('Input: ' + number)
-
 @app.route('/primesStored')
 def primesStored():
     return 'The following prime numbers are stored...'
