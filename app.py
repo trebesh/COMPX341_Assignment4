@@ -26,6 +26,10 @@ def hello():
 
 @app.route('/isPrime')
 def isPrime():
-    return 'Calculating whethe the number is prime...'
+    return 'Calculating whether the number is prime...'
+
+@app.route('/primesStored')
+def primesStored():
+    return 'The following prime numbers are stored...'
 
     
