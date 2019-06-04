@@ -24,9 +24,10 @@ def hello():
     count = get_hit_count()
     return 'Hello World! I have been seen {} times.\n'.format(count)
 
-@app.route('/isPrime')
-def isPrime():
-    return 'Calculating whether the number is prime...'
+@app.route('/isPrime/<number>')
+def isPrime(number):
+    
+    return 'Input: '
 
 @app.route('/primesStored')
 def primesStored():
