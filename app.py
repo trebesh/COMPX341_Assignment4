@@ -27,7 +27,7 @@ def hello():
 @app.route('/isPrime/<number>')
 def isPrime(number):
     
-    return 'Input: '
+    return ('Input: ' + number)
 
 @app.route('/primesStored')
 def primesStored():
