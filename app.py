@@ -47,8 +47,16 @@ def isPrime(numberString):
     
 @app.route('/primesStored')
 def primesStored():
-    #while (cache.llen(primes) != 0):
-        #print(cache.lpop(primes))
-    return str(cache.lrange(primes, 0, -1))
+    ls = [];
+    val = 0;
+    for i in range (0, cache.llen(primes)):
+        val = cache.lpop(primes)
+        cache.rpush(primes, val)
+        if val not in ls: #Only add items to the retun list if they arent already in it (no duplicates)
+            ls.extend([val])
+        i += 1;
+
+    return str(ls)
+
 
     
