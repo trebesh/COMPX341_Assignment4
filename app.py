@@ -33,17 +33,25 @@ def hello():
 @app.route('/isPrime/<numberString>')
 def isPrime(numberString):
     number = int(numberString)
+    
     if number > 1:
-        for i in range(2, number//2 + 1):
-            if (number % i) == 0:
+        i = 2;
+        while i*i <=number:
+            if number % i == 0:
                 return (numberString + ' is not prime')
-        else:
+            i += 1
+        addPrime(number)
+        return (numberString + ' is prime') 
+        #for i in range(2, number//2 + 1):
+         #   if (number % i) == 0:
+          #      return (numberString + ' is not prime')
+        #else:
             #Add the number to the list
-            addPrime(number)
-            return (numberString + ' is prime')
+         #   addPrime(number)
+          #  return (numberString + ' is prime')
     else:
         return (numberString + ' is not prime')
-    #primeness algorithm adapted from https://www.geeksforgeeks.org/python-program-to-check-whether-a-number-is-prime-or-not/
+    #primeness algorithm adapted from https://www.rookieslab.com/posts/fastest-way-to-check-if-a-number-is-prime-or-not
     
 @app.route('/primesStored')
 def primesStored():
@@ -54,9 +62,15 @@ def primesStored():
         cache.rpush(primes, val)
         if val not in ls: #Only add items to the retun list if they arent already in it (no duplicates)
             ls.extend([val])
-        i += 1;
+        i += 1
 
     return str(ls)
+
+@app.route('/clearPrimesStored')
+def clearPrimesStored():
+    for i in range (0, cache.llen(primes)):
+        cache.lpop(primes)
+    return "List of primesStore has been cleared..."
 
 
     
